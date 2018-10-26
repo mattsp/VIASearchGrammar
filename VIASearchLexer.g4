@@ -4,7 +4,7 @@ SLASH: '/';
 fragment WS: ' ';
 fragment SLASH_RIGTH_BRACKET: '/]';
 fragment LEFT_BRACKET: '[';
-RIGTH_BRACKET: ']';
+fragment RIGTH_BRACKET: ']';
 TEXT: ( ~[[])+;
 
 START_TAG: LEFT_BRACKET -> pushMode(IN_TAG);
@@ -12,7 +12,7 @@ START_TAG: LEFT_BRACKET -> pushMode(IN_TAG);
 mode IN_TAG;
 TAG_ATTRIBUTE: (TAG_NAME TAG_EQUALS ATTVALUE_VALUE)
 	| (TAG_NAME WS);
-END_TAG: SLASH_RIGTH_BRACKET WS -> popMode;
+END_TAG: (SLASH_RIGTH_BRACKET WS | SLASH_RIGTH_BRACKET)-> popMode;
 
 // attribute values
 mode ATTVALUE;
